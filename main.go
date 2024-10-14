@@ -12,6 +12,8 @@ func home(w http.ResponseWriter, r *http.Request){
 }
 
 func coffeeView(w http.ResponseWriter, r *http.Request){
+	w.Header().Add("Server", "Napkins")
+	w.WriteHeader(http.StatusAccepted)
 	w.Write([]byte("View coffee!"))
 
 	
