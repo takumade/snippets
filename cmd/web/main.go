@@ -13,8 +13,8 @@ func main() {
 	mux.HandleFunc("POST /coffee/add", coffeeAdd)
 	mux.HandleFunc("DELETE /coffee/delete/{id}", coffeeDelete)
 
-	log.Print("Starting server on :4000")
+	log.Print("Starting server on :5000")
 
-	err := http.ListenAndServe(":4000", mux)
+	err := http.ListenAndServe(":5000", mux)
 	log.Fatal(err)
 }
