@@ -1,9 +1,7 @@
-# Coffee Backend
+# Snippets app
 
-Backend for coffee app
+Snippets app
 
 ## Stack
 
 - Mux (Router)
-
-
