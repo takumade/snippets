@@ -3,12 +3,11 @@ package main
 import (
 	"fmt"
 	"html/template"
-	"log"
 	"net/http"
 	"strconv"
 )
 
-func home(w http.ResponseWriter, r *http.Request) {
+func (app *application) home(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Add("Server", "Go")
 	// Include the navigation partial in the template files.
@@ -19,25 +18,25 @@ func home(w http.ResponseWriter, r *http.Request) {
 	}
 	ts, err := template.ParseFiles(files...)
 	if err != nil {
-		log.Print(err.Error())
+		app.logger.Error(err.Error(), "method", r.Method, "url", r.URL.RequestURI())
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
 	err = ts.ExecuteTemplate(w, "base", nil)
 	if err != nil {
-		log.Print(err.Error())
+		app.logger.Error(err.Error(), "method", r.Method, "url", r.URL.RequestURI())
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}
 }
 
-func coffeeView(w http.ResponseWriter, r *http.Request) {
+func (app *application) coffeeView(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Server", "Napkins")
 	w.WriteHeader(http.StatusAccepted)
 	w.Write([]byte("View coffee!"))
 
 }
 
-func coffeeDelete(w http.ResponseWriter, r *http.Request) {
+func (app *application) coffeeDelete(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("View delete!"))
 
 	id, err := strconv.Atoi(r.PathValue("id"))
@@ -52,6 +51,6 @@ func coffeeDelete(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func coffeeAdd(w http.ResponseWriter, r *http.Request) {
+func (app *application) coffeeAdd(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Add coffee!"))
 }
