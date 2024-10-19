@@ -30,7 +30,9 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 func (app *application) snippetView(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Server", "Napkins")
 	w.WriteHeader(http.StatusAccepted)
-	w.Write([]byte("View coffee!"))
+
+	id := r.PathValue("id")
+	w.Write([]byte("View a specific coffee with ID " + id + "..."))
 
 }
 
