@@ -41,6 +41,7 @@ func (m *SnippetModel) Insert(title string, content string, expires int) (int, e
 
 
 func (m *SnippetModel) Get(id int) (Snippet, error) {
+	// stmt := `SELECT id, title, content, `
 	return Snippet{}, nil
 }
 
