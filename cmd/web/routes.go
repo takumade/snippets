@@ -8,8 +8,8 @@ func (app *application) routes() *http.ServeMux {
 	mux.Handle("GET /static/", http.StripPrefix("/static", fileServer))
 
 	mux.HandleFunc("GET /{$}", app.home)
-	mux.HandleFunc("GET /snippet/{id}", app.coffeeView)
-	mux.HandleFunc("POST /snippet/add", app.coffeeAdd)
-	mux.HandleFunc("DELETE /snippet/delete/{id}", app.coffeeDelete)
+	mux.HandleFunc("GET /snippet/{id}", app.snippetView)
+	mux.HandleFunc("POST /snippet/add", app.snippetAdd)
+	mux.HandleFunc("DELETE /snippet/delete/{id}", app.snippetDelete)
     return mux
 }

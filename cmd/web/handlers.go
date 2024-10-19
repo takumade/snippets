@@ -27,14 +27,14 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (app *application) coffeeView(w http.ResponseWriter, r *http.Request) {
+func (app *application) snippetView(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Server", "Napkins")
 	w.WriteHeader(http.StatusAccepted)
 	w.Write([]byte("View coffee!"))
 
 }
 
-func (app *application) coffeeDelete(w http.ResponseWriter, r *http.Request) {
+func (app *application) snippetDelete(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("View delete!"))
 
 	id, err := strconv.Atoi(r.PathValue("id"))
@@ -49,6 +49,6 @@ func (app *application) coffeeDelete(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func (app *application) coffeeAdd(w http.ResponseWriter, r *http.Request) {
+func (app *application) snippetAdd(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Add coffee!"))
 }
