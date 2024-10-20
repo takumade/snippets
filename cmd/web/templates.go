@@ -3,5 +3,5 @@ package main
 import "snippetbox.takucoder.dev/internal/models"
 
 type templateData struct {
-	Snippet *models.Snippet
+	Snippet models.Snippet
 }
