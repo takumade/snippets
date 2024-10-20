@@ -1,12 +1,12 @@
 package main
 
 import (
+	"coffeebackend.takucoder.dev/internal/models"
+	"errors"
 	"fmt"
-	// "html/template"
+	"html/template"
 	"net/http"
 	"strconv"
-	"errors"
-	"coffeebackend.takucoder.dev/internal/models"
 )
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
@@ -24,7 +24,6 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	for _, snippet := range snippets {
 		fmt.Fprintf(w, "%v\n", snippet)
 	}
-
 
 	// files := []string{
 	// 	"./ui/html/base.html",
@@ -45,28 +44,40 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 func (app *application) snippetView(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(r.PathValue("id"))
 
-	if err != nil || id< 1 {
+	if err != nil || id < 1 {
 		http.NotFound(w, r)
 		return
 	}
 
-
-	snippet,err := app.snippets.Get(id)
+	snippet, err := app.snippets.Get(id)
 
 	if err != nil {
-		if errors.Is(err, models.ErrNoRecord){
+		if errors.Is(err, models.ErrNoRecord) {
 			http.NotFound(w, r)
-		}else {
+		} else {
 			app.serverError(w, r, err)
 		}
 
-		return 
-
+		return
 
 	}
 
+	files := []string{
+		"./ui/html/base.tmpl",
+		"./ui/html/partials/nav.tmpl",
+		"./ui/html/pages/view.tmpl",
+	}
 
-	fmt.Fprintf(w, "%v", snippet)
+	ts, err := template.ParseFiles(files...)
+	if err != nil {
+		app.serverError(w, r, err)
+		return
+	}
+
+	err = ts.ExecuteTemplate(w, "base", snippet)
+	if err != nil {
+		app.serverError(w, r, err)
+	}
 }
 
 func (app *application) snippetDelete(w http.ResponseWriter, r *http.Request) {
@@ -88,7 +99,7 @@ func (app *application) snippetAdd(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Add coffee!"))
 }
 
-func (app *application) snippetCreatePost (w http.ResponseWriter, r *http.Request){
+func (app *application) snippetCreatePost(w http.ResponseWriter, r *http.Request) {
 	title := "O snail"
 	content := "Climb Mount Fuji, But slowly, slowly!"
 	expires := 7
