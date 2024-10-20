@@ -1,7 +1,7 @@
 package main
 
 import (
-	"coffeebackend.takucoder.dev/internal/models"
+	"snippetbox.takucoder.dev/internal/models"
 	"errors"
 	"fmt"
 	"html/template"
