@@ -5,6 +5,8 @@ import (
 	"html/template"
 	"net/http"
 	"strconv"
+	"errors"
+	"coffeebackend.takucoder.dev/internal/models"
 )
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
@@ -28,12 +30,30 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) snippetView(w http.ResponseWriter, r *http.Request) {
-	w.Header().Add("Server", "Napkins")
-	w.WriteHeader(http.StatusAccepted)
+	id, err := strconv.Atoi(r.PathValue("id"))
 
-	id := r.PathValue("id")
-	w.Write([]byte("View a specific coffee with ID " + id + "..."))
+	if err != nil || id< 1 {
+		http.NotFound(w, r)
+		return
+	}
 
+
+	snippet,err := app.snippets.Get(id)
+
+	if err != nil {
+		if errors.Is(err, models.ErrNoRecord){
+			http.NotFound(w, r)
+		}else {
+			app.serverError(w, r, err)
+		}
+
+		return 
+
+
+	}
+
+
+	fmt.Fprintf(w, "%v", snippet)
 }
 
 func (app *application) snippetDelete(w http.ResponseWriter, r *http.Request) {
