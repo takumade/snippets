@@ -7,12 +7,12 @@ import (
 	"net/http"
 	"os"
 
-	"coffeebackend.takucoder.dev/internal/models"
 	_ "github.com/go-sql-driver/mysql" // New import
+	"snippetbox.takucoder.dev/internal/models"
 )
 
 type application struct {
-	logger *slog.Logger
+	logger   *slog.Logger
 	snippets *models.SnippetModel
 }
 
@@ -20,10 +20,9 @@ func main() {
 
 	addr := flag.String("addr", ":4000", "HTTP network address")
 	dsn := flag.String("dsn", "web:pass@/snippetbox?parseTime=true", "MySQL data source name")
-    flag.Parse()
+	flag.Parse()
 
 	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
-
 
 	db, err := openDB(*dsn)
 
@@ -35,7 +34,7 @@ func main() {
 	defer db.Close()
 
 	app := &application{
-		logger: logger,
+		logger:   logger,
 		snippets: &models.SnippetModel{DB: db},
 	}
 
