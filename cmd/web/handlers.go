@@ -4,7 +4,6 @@ import (
 	"snippetbox.takucoder.dev/internal/models"
 	"errors"
 	"fmt"
-	"html/template"
 	"net/http"
 	"strconv"
 )
