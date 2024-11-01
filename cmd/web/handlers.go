@@ -118,3 +118,24 @@ func (app *application) snippetCreatePost(w http.ResponseWriter, r *http.Request
 
 	http.Redirect(w, r, fmt.Sprintf("/snippet/view/%d", id), http.StatusSeeOther)
 }
+
+
+func (app *application) render(w http.ResponseWriter, r *http.Request, status int, page string, data templateData){
+	ts, ok := app.templateCache[page]
+
+	if !ok {
+		err := fmt.Errorf("the template %s does not exist", page)
+		app.serverError(w, r, err)
+		return 
+	}
+
+	w.WriteHeader(status)
+
+
+	err := ts.ExecuteTemplate(w, "base", data)
+
+	if err != nil {
+		app.serverError(w, r, err)
+	}	
+
+}
