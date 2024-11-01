@@ -46,30 +46,11 @@ func (app *application) snippetView(w http.ResponseWriter, r *http.Request) {
 		}
 
 		return
-
 	}
 
-	files := []string{
-		"./ui/html/base.html",
-		"./ui/html/partials/nav.html",
-		"./ui/html/pages/view.html",
-	}
-
-	ts, err := template.ParseFiles(files...)
-	if err != nil {
-		app.serverError(w, r, err)
-		return
-	}
-
-
-	data := templateData{
+	app.render(w,r,http.StatusOK, "view.html", templateData{
 		Snippet: snippet,
-	}
-
-	err = ts.ExecuteTemplate(w, "base", data)
-	if err != nil {
-		app.serverError(w, r, err)
-	}
+	})
 }
 
 func (app *application) snippetDelete(w http.ResponseWriter, r *http.Request) {
