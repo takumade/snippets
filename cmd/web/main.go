@@ -6,7 +6,7 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
-	"text/template"
+	"html/template"
 
 	_ "github.com/go-sql-driver/mysql" // New import
 	"snippetbox.takucoder.dev/internal/models"
