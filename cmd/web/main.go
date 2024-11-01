@@ -6,6 +6,7 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
+	"text/template"
 
 	_ "github.com/go-sql-driver/mysql" // New import
 	"snippetbox.takucoder.dev/internal/models"
@@ -14,6 +15,7 @@ import (
 type application struct {
 	logger   *slog.Logger
 	snippets *models.SnippetModel
+	templateCache map[string]*template.Template
 }
 
 func main() {
