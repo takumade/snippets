@@ -1,8 +1,6 @@
-{{define "title"}}Snippet #{{.Snippet.ID}}{{end}} 
-
-{{define "main"}}
-{{ with .Snippet}}
-<div class="snippet"></div>
+{{define "title"}}Snippet #{{.Snippet.ID}}{{end}} {{define "main"}} {{with
+.Snippet}}
+<div class="snippet">
   <div class="metadata">
     <strong>{{.Title}}</strong>
     <span>#{{.ID}}</span>
@@ -13,6 +11,4 @@
     <time>Expires: {{.Expires}}</time>
   </div>
 </div>
-{{ end }}
-{{end}}
-
+{{end}} {{end}}
