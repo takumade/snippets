@@ -12,5 +12,5 @@ func (app *application) routes() http.Handler {
 	mux.HandleFunc("POST /snippet/add", app.snippetAdd)
 	mux.HandleFunc("POST /snippet/create", app.snippetCreatePost)
 	mux.HandleFunc("DELETE /snippet/delete/{id}", app.snippetDelete)
-    return commonHeaders(mux)
+    return app.logRequest(commonHeaders(mux));
 }
