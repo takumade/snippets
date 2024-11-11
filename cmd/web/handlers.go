@@ -22,9 +22,10 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	app.render(w, r, http.StatusOK, "home.html", templateData{
-		Snippets: snippets,
-	})
+	data := app.newTemplateData(r)
+	data.Snippets = snippets
+
+	app.render(w, r, http.StatusOK, "home.html", data)
 
 	
 }
@@ -49,9 +50,10 @@ func (app *application) snippetView(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	app.render(w,r,http.StatusOK, "view.html", templateData{
-		Snippet: snippet,
-	})
+	data := app.newTemplateData(r)
+	data.Snippet = snippet
+
+	app.render(w,r,http.StatusOK, "view.html", data)
 }
 
 func (app *application) snippetDelete(w http.ResponseWriter, r *http.Request) {
@@ -69,14 +71,32 @@ func (app *application) snippetDelete(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func (app *application) snippetCreate(w http.ResponseWriter, r *http.Request){
+	data := app.newTemplateData(r)
+	app.render(w, r, http.StatusOK, "create.html", data)
+}
+
 func (app *application) snippetAdd(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Add coffee!"))
 }
 
 func (app *application) snippetCreatePost(w http.ResponseWriter, r *http.Request) {
-	title := "O snail"
-	content := "Climb Mount Fuji, But slowly, slowly!"
-	expires := 7
+
+
+	err := r.ParseForm()
+	if err != nil {
+		app.clientError(w, http.StatusBadRequest)
+		return
+	}
+
+	title := r.PostForm.Get("title")
+	content := r.PostForm.Get("content")
+	expires, err := strconv.Atoi(r.PostForm.Get("expires"))
+
+	if err != nil {
+		app.clientError(w, http.StatusBadRequest)
+		return 
+	}
 
 	id, err := app.snippets.Insert(title, content, expires)
 	if err != nil {

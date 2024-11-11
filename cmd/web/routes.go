@@ -1,7 +1,11 @@
 package main
-import "net/http"
+import (
+	"net/http"
+	"github.com/justinas/alice"
+)
+
 // The routes() method returns a servemux containing our application routes.
-func (app *application) routes() *http.ServeMux {
+func (app *application) routes() http.Handler {
 	mux := http.NewServeMux()
 	fileServer := http.FileServer(http.Dir("./ui/static"))
 
@@ -10,7 +14,10 @@ func (app *application) routes() *http.ServeMux {
 	mux.HandleFunc("GET /{$}", app.home)
 	mux.HandleFunc("GET /snippet/view/{id}", app.snippetView)
 	mux.HandleFunc("POST /snippet/add", app.snippetAdd)
+	mux.HandleFunc("GET /snippet/create", app.snippetCreate)
 	mux.HandleFunc("POST /snippet/create", app.snippetCreatePost)
 	mux.HandleFunc("DELETE /snippet/delete/{id}", app.snippetDelete)
-    return mux
+
+	standard := alice.New(app.recoverPanic, app.logRequest, commonHeaders)
+    return standard.Then(mux)
 }
