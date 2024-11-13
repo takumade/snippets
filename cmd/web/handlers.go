@@ -12,6 +12,13 @@ import (
 	"snippetbox.takucoder.dev/internal/models"
 )
 
+type snippetCreateForm struct {
+	Title string 
+	Content string 
+	Expires string
+	FieldError map[string]string
+}
+
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Add("Server", "Go")
