@@ -1,5 +1,6 @@
 # Snippets app
 
+![Snippets snippets](./assets/snippets.png)
 ## Description
 
 This is a simple snippets app that allows you to store text snippets.
