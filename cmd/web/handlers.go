@@ -6,8 +6,6 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
-	"strings"
-	"unicode/utf8"
 
 	"snippetbox.takucoder.dev/internal/models"
 	"snippetbox.takucoder.dev/internal/validator"
