@@ -117,13 +117,10 @@ func (app *application) snippetCreatePost(w http.ResponseWriter, r *http.Request
 		Expires: expires,
 	}
 
+	// Validation 
+	form.CheckFiled(validator.NotBlank(form.Title), "title", "This field cannot be blank")
+	form.CheckFiled(validator.MaxChars(form.Title, 100), "title", "This field cannot be more than 100 characters long")
 
-	// validate title
-	if strings.TrimSpace(form.Title) == "" {
-		form.FieldErrors["title"] = "This field cannot be blank"
-	} else if utf8.RuneCountInString(form.Title) > 100 {
-		form.FieldErrors["title"] = "This field cannot be more than 100 characters long"
-	}
 
 	// validate content
 	if strings.TrimSpace(form.Content) == "" {
