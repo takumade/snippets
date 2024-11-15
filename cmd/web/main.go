@@ -9,13 +9,15 @@ import (
 	"html/template"
 
 	_ "github.com/go-sql-driver/mysql" // New import
+	"github.com/go-playground/form/v4"
 	"snippetbox.takucoder.dev/internal/models"
 )
 
 type application struct {
-	logger   *slog.Logger
-	snippets *models.SnippetModel
-	templateCache map[string]*template.Template
+	logger          *slog.Logger
+	snippets        *models.SnippetModel
+	templateCache   map[string]*template.Template
+	formDecoder    *form.Decoder
 }
 
 func main() {
