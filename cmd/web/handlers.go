@@ -10,13 +10,14 @@ import (
 	"unicode/utf8"
 
 	"snippetbox.takucoder.dev/internal/models"
+	"snippetbox.takucoder.dev/internal/validator"
 )
 
 type snippetCreateForm struct {
 	Title string 
 	Content string 
 	Expires int
-	FieldErrors map[string]string
+	validator.Validator
 }
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
