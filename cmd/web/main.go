@@ -1,16 +1,17 @@
 package main
 
 import (
+	"crypto/tls"
 	"database/sql"
 	"flag"
+	"html/template"
 	"log/slog"
 	"net/http"
 	"os"
-	"html/template"
 	"time"
 
-	_ "github.com/go-sql-driver/mysql" // New import
 	"github.com/go-playground/form/v4"
+	_ "github.com/go-sql-driver/mysql" // New import
 	"snippetbox.takucoder.dev/internal/models"
 
 	"github.com/alexedwards/scs/mysqlstore" // New import
@@ -64,10 +65,15 @@ func main() {
 		sessionManager: sessionManager,
 	}
 
+	tlsConfig := &tls.Config{
+		CurvePreferences: []tls.CurveID{tls.X25519, tls.CurveP256},
+	}
+
 	srv := &http.Server{
 		Addr:	 *addr,
 		Handler: app.routes(), 
 		ErrorLog: slog.NewLogLogger(logger.Handler(), slog.LevelError),
+		TLSConfig: tlsConfig,
 	}
 
 	logger.Info("starting server", "addr", srv.Addr)
