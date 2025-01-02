@@ -179,6 +179,10 @@ func (app *application) userSignupPost(w http.ResponseWriter, r *http.Request) {
 		
 		return
 	}
+
+	app.sessionManager.Put(r.Context(), "flash", "Your signup was successful. Please login")
+
+	http.Redirect(w, r, "/user/login", http.StatusSeeOther)
 }
 
 func (app *application) userLogin(w http.ResponseWriter, r *http.Request) {
