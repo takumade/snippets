@@ -11,7 +11,8 @@ var EmailRx = regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](
 
 
 type Validator struct {
-	FieldErrors  map[string]string
+	NonFieldErrors  []string
+	FieldErrors     map[string]string
 }
 
 
