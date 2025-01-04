@@ -14,7 +14,7 @@ type templateData struct {
 	Snippets []models.Snippet
 	Form  any
 	Flash string
-	isAuthenticated bool
+	IsAuthenticated bool
 }
 
 func humanDate(t  time.Time) string {
