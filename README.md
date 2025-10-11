@@ -51,13 +51,17 @@ FLUSH PRIVILEGES;
 go mod tidy
 ```
 
+5. Install certs
 
+```bash
+mkdir tls && cd tls && go run /usr/local/go/src/crypto/tls/generate_cert.go --rsa-bits=2048 --host=localhost
+```
 
-5. Run the server
+6. Run the server
 
 ```bash
 go run ./cmd/web
 ```
 
-6. Open your browser and navigate to `http://localhost:4000`
+7. Open your browser and navigate to `http://localhost:4000`
 
