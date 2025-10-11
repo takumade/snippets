@@ -25,17 +25,39 @@ git clone https://github.com/takumade/snippets
 cd snippets
 ```
 
-3. Install dependencies
+
+3. Database setup
+
+**Create database:**
+
+```sql
+CREATE DATABASE snippetbox;
+CREATE USER 'web'@'localhost' WITH PASSWORD 'pass';
+GRANT ALL PRIVILEGES ON snippetbox.* TO 'web'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+**Create tables:**
+
+`internal/db/users.sql`
+`internal/db/snippets.sql`
+`internal/db/sessions.sql`
+
+
+
+4. Install dependencies
 
 ```bash
 go mod tidy
 ```
 
-4. Run the server
+
+
+5. Run the server
 
 ```bash
 go run ./cmd/web
 ```
 
-5. Open your browser and navigate to `http://localhost:4000`
+6. Open your browser and navigate to `http://localhost:4000`
 
