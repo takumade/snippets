@@ -73,6 +73,7 @@ func main() {
 
 	srv := &http.Server{
 		Addr:	 *addr,
+		MaxHeaderBytes: 524288,
 		Handler: app.routes(), 
 		ErrorLog: slog.NewLogLogger(logger.Handler(), slog.LevelError),
 		TLSConfig: tlsConfig,
