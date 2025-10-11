@@ -41,6 +41,7 @@ FLUSH PRIVILEGES;
 
 `internal/db/users.sql`
 `internal/db/snippets.sql`
+`internal/db/sessions.sql`
 
 
 
