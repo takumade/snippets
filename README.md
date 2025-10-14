@@ -5,11 +5,10 @@ This snippets app lets you store, edit, and manage reusable pieces of text or co
 |------------|------------|
 | ![Snippets app preview 1](./assets/snippets2.png) | ![Snippets app preview 2](./assets/snippets3.png) |
 
-| Preview 3 | 
-|------------|
-| ![Snippets app preview 3](./assets/snippets4.png) |
+| Preview 3 | Preview 4 |
+|------------|------------|
+| ![Snippets app preview 3](./assets/snippets4.png) | ![Snippets app preview 4](./assets/snippets5.png) |
 
-![Snippets snippets](./assets/snippets4.png)
 
 
 ## Stack
