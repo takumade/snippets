@@ -57,6 +57,7 @@ func main() {
 	sessionManager.Store =  mysqlstore.New(db)
 	sessionManager.Lifetime = 12 * time.Hour
 	sessionManager.Cookie.Secure = true
+	sessionManager.Cookie.SameSite = http.SameSiteStrictMode
 
 	app := &application{
 		logger:   logger,
@@ -73,6 +74,7 @@ func main() {
 
 	srv := &http.Server{
 		Addr:	 *addr,
+		MaxHeaderBytes: 524288,
 		Handler: app.routes(), 
 		ErrorLog: slog.NewLogLogger(logger.Handler(), slog.LevelError),
 		TLSConfig: tlsConfig,
