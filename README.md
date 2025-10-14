@@ -1,6 +1,6 @@
 # Snippets app
 
-![Snippets snippets](./assets/snippets.png)
+
 ![Snippets snippets](./assets/snippets2.png)
 ![Snippets snippets](./assets/snippets3.png)
 ![Snippets snippets](./assets/snippets4.png)
