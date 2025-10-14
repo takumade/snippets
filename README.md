@@ -1,6 +1,9 @@
 # Snippets app
 
 ![Snippets snippets](./assets/snippets.png)
+![Snippets snippets](./assets/snippets2.png)
+![Snippets snippets](./assets/snippets3.png)
+![Snippets snippets](./assets/snippets4.png)
 ## Description
 
 This is a simple snippets app that allows you to store text snippets.
@@ -10,6 +13,8 @@ This is a simple snippets app that allows you to store text snippets.
 - Mux (Router)
 - Go SQL Driver (Database)
 - Alice (Middleware)
+- NoSurf (CSRF protection)
+
 
 ## How to run
 
