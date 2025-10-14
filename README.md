@@ -10,6 +10,8 @@ This is a simple snippets app that allows you to store text snippets.
 - Mux (Router)
 - Go SQL Driver (Database)
 - Alice (Middleware)
+- NoSurf (CSRF protection)
+
 
 ## How to run
 
