@@ -20,22 +20,22 @@ This snippets app lets you store, edit, and manage reusable pieces of text or co
 
 ## How to run
 
-1. Clone the repository
+**1. Clone the repo**
 
 ```bash
 git clone https://github.com/takumade/snippets
 ```
 
-2. Change directory
+**2. Change directory**
 
 ```bash
 cd snippets
 ```
 
 
-3. Database setup
+**3. Database setup**
 
-**Create database:**
+*Create database:*
 
 ```sql
 CREATE DATABASE snippetbox;
@@ -44,7 +44,7 @@ GRANT ALL PRIVILEGES ON snippetbox.* TO 'web'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
-**Create tables:**
+*Create tables:*
 
 `internal/db/users.sql`
 `internal/db/snippets.sql`
@@ -52,23 +52,30 @@ FLUSH PRIVILEGES;
 
 
 
-4. Install dependencies
+**4. Install dependencies**
 
 ```bash
 go mod tidy
 ```
 
-5. Install certs
+**5. Install certs**
 
 ```bash
 mkdir tls && cd tls && go run /usr/local/go/src/crypto/tls/generate_cert.go --rsa-bits=2048 --host=localhost
 ```
 
-6. Run the server
+**6. Run the server**
 
 ```bash
 go run ./cmd/web
 ```
 
-7. Open your browser and navigate to `http://localhost:4000`
+Open your browser and navigate to `http://localhost:4000`
 
+**7. Runnning Tests**
+
+Simply run the following command:
+
+```bash
+go test -v ./cmd/web
+```
