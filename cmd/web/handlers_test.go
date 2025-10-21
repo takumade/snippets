@@ -2,9 +2,6 @@ package main
 
 import (
 	"net/http"
-	"net/http/httptest"
-	"io"
-	"bytes"
 	"testing"
 	
 	
@@ -14,28 +11,15 @@ import (
 
 
 func TestPing(t *testing.T){
-	rr := httptest.NewRecorder()
 	
-	r, err := http.NewRequest(http.MethodGet, "/", nil)
-	if err != nil{
-		t.Fatal(err)
-	}
-	
-	ping(rr, r)
-	
-	rs := rr.Result()
-	
-	assert.Equal(t, rs.StatusCode, http.StatusOK)
+	app := newTestApplication(t)
 	
 	
-	defer rs.Body.Close()
-	body, err := io.ReadAll(rs.Body)
+	ts :=newTestServer(t, app.routes())
+	defer ts.Close()
 	
-	if err != nil {
-		t.Fatal(err)
-	}
+	code, _, body := ts.get(t, "/ping")
 	
-	body = bytes.TrimSpace(body)
-	assert.Equal(t, string(body), "OK")
-	
+	assert.Equal(t, code, http.StatusOK)
+	assert.Equal(t, body, "OK")
 }
