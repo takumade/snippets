@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"io"
+	"log/slog"
 	"bytes"
 	"testing"
 	
@@ -14,6 +15,12 @@ import (
 
 
 func TestPing(t *testing.T){
+	
+	app := &application{
+		logger: slog.New(slog.NewTextHandler(io.Discard, nil)),
+	}
+	
+	
 	rr := httptest.NewRecorder()
 	
 	r, err := http.NewRequest(http.MethodGet, "/", nil)
