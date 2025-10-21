@@ -30,17 +30,6 @@ func TestPing(t *testing.T){
 		t.Fatal(err)
 	}
 	
-	rr := httptest.NewRecorder()
-	
-	r, err := http.NewRequest(http.MethodGet, "/", nil)
-	if err != nil{
-		t.Fatal(err)
-	}
-	
-	ping(rr, r)
-	
-	rs := rr.Result()
-	
 	assert.Equal(t, rs.StatusCode, http.StatusOK)
 	
 	
