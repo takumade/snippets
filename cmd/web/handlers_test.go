@@ -21,6 +21,15 @@ func TestPing(t *testing.T){
 	}
 	
 	
+	ts := httptest.NewTLSServer(app.routes())
+	defer ts.Close()
+	
+	
+	rs, err := ts.Client().Get(ts.URL + "/ping")
+	if err != nil {
+		t.Fatal(err)
+	}
+	
 	rr := httptest.NewRecorder()
 	
 	r, err := http.NewRequest(http.MethodGet, "/", nil)
